@@ -1,7 +1,9 @@
-from board import Board
+from game import GameOfLife
 
 if __name__ == "__main__":
 
-    board_game = Board()
-    board_game.load_file("../assets/board.txt")
-    print(board_game)
+    game = GameOfLife(600, 50, 1)
+    # game.board.load_file("../assets/board.txt")
+    game.init_window()
+    game.play_game()
+    print(game.board)
