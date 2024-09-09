@@ -10,15 +10,21 @@ class Board:
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"File {filepath} does not exist")
 
+        self.board = []
+
         with open(filepath, "r") as file:
 
-            row_length = len(list(file[0].strip().split(",")))
+            lines = file.read().splitlines()
+            row_length = len(lines[0].strip().split(","))
 
-            for i, line in enumerate(file):
+            for i, line in enumerate(lines):
                 row = list(map(int, line.strip().split(",")))
                 if len(row) != row_length:
                     raise ValueError(
                         f"Invalid row length at line {i+1}. Expected {row_length} values, got {len(row)}"
                     )
 
-                self.board[i] = row
+                self.board.append(row)
+
+    def __repr__(self) -> str:
+        return f"Board size : {len(self.board)} x {len(self.board[0]) if len(self.board) > 0 else 0}"
